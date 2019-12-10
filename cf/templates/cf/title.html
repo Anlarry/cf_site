@@ -1,0 +1,271 @@
+<style>
+        #pros
+        {
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            width:100%;
+            /* margin:auto; */
+            /* text-align: left; */
+            border-collapse:collapse;
+        }
+        #pros td, #pros th 
+        {
+            font-size:1em;
+            border:1px solid #2091b4;
+            text-align: center;
+            padding:3px 7px 2px 7px;
+        }
+        #pros th 
+        {
+            font-size:1.1em;
+            text-align:center;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color:#2091b4;
+            color:#ffffff;
+        }
+        #pros tr.alt td 
+        {
+            color:#000000;
+            background-color:rgb(211, 238, 242);
+        }
+        .page_index .num
+        {
+            display:inline-block;
+            color: #333;
+            text-decoration: none;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+            line-height: 32px;
+        }
+        .page_index .on
+        {
+            background: #333;
+            color:#ffffff;
+            border-radius: 100%;
+        }
+        .contain{
+            width: 100%;
+            /* margin: auto; */
+        }
+        .contain::after{
+            display: block;
+            content: "";
+            visibility: hidden;
+            clear: both;
+        }
+        .left
+        {
+            float: left;
+            width: 70%;
+            /* margin-right: -300px; */
+        }
+        .right
+        {
+            float: right;
+            width: 30%;
+            /* margin-right: 300px;; */
+            text-align: center;
+            /* width: 300px; */
+        }
+        .dif_filter
+        {
+            width: 95%;
+            border:1px solid #2091b4;
+            border-radius: 5px;
+            margin: auto;
+        }
+        .dif_filter .title{
+            background: #2091b4;
+            text-align: center;
+            color: #ffffff;
+            font-size:1.1em;
+            padding-top:5px;
+            padding-bottom:4px;
+        }
+        .tag_filter{
+            width: 95%;
+            border:1px solid #2091b4;
+            border-radius: 5px;
+            margin: auto; 
+        }
+        .tag_filter .title{
+            background: #2091b4;
+            text-align: center;
+            color: #ffffff;
+            font-size:1.1em;
+            padding-top:5px;
+            padding-bottom:4px;
+        }
+    </style>
+
+<script>
+    function fun(){
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+        window.location.href="/cf/problem/dif-"+from+'-'+to+'/page/1';
+    }
+    function Add_tag(){
+        var obj =document.getElementById('tag_select') ;
+        var idx = obj.selectedIndex;
+        var value = obj.options[idx].value
+        var tag_obj = document.getElementById('tags');
+        if(tag_obj.value != "")
+            tag_obj.value = tag_obj.value + ','+ value ;
+        else
+            tag_obj.value = value;
+    }
+    function fun_tag(){
+        var tags = document.getElementById('tags').value;
+        // tags = tags.replace(/,/g, '-');
+        if(tags == "")
+            window.location.href="/cf/problem/page/1";
+        else
+            window.location.href="/cf/problem/tag-"+tags+'/page/1';
+    }
+</script>
+    
+<div style="width: 1250px;margin: auto;">
+<h1 style="text-align:left;">{{title}}</h1>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#987cb9 SIZE=3>    
+
+
+<div class="contain">
+    <div class="left">
+        <div style="text-align: left;">
+        <table id='pros'style="text-align: left;">
+            <tr>
+                <th>#</th>
+                <th>NAME</th>
+                <th>Algorithm Tag</th>
+                <th>Difficulty</th>
+            </tr>
+            {% for each in pros%}
+                <tr class="alt">
+                    <td>
+                        <a style="text-decoration: none;color: black;" href="{% url 'problem_page' each.pro_id%}">{{each.pro_id}}</a>
+                    </td>
+                    <td>
+                        <a style="text-decoration: none;color: black;" href="{% url 'problem_page' each.pro_id%}">{{each.name}}</a>
+                    </td>
+                    <td>{{each.tags}}</td>
+                    <td>{{each.dif}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+        </div>
+
+        <div style="text-align: center;" class="page_index">
+                {%if page_id <= 5%}
+                    {%for i in range_1_to_now_page%}
+                        {% if i == page_id%}
+                            <a href="/cf/problem/page/{{page_id}}" class="on num">{{page_id}}</a>
+                        {%else%}
+                            <a href="/cf/problem/page/{{i}}" class="num">{{i}}</a>
+                        {%endif%}
+                    {%endfor%}
+                    <a href="/cf/problem/page/{{page_id|add:1}}" class="num">{{page_id|add:1}}</a>
+                    <a href="/cf/problem/page/{{page_id|add:2}}" class="num">{{page_id|add:2}}</a>
+                    <span>...</span>
+                    <a href="/cf/problem/page/{{all_page|add:-1}}" class="num">{{all_page|add:-1}}</a>
+                    <a href="/cf/problem/page/{{all_page}}" class="num">{{all_page|add:0}}</a>
+                {%elif page_id|add:4 >= all_page %}
+                    <a href="/cf/problem/page/1" class="num">1</a>
+                    <a href="/cf/problem/page/2" class="num">2</a>
+                    <span>...</span>
+                    <a href="/cf/problem/page/{{page_id|add:-2}}" class="num">{{page_id|add:-2}}</a>
+                    <a href="/cf/problem/page/{{page_id|add:-1}}" class="num">{{page_id|add:-1}}</a>
+                    <a href="/cf/problem/page/{{page_id}}"class="on num"> {{page_id}}</a> 
+                    {%for i in range_now_page_to_all%}
+                        <a href="/cf/problem/page/{{i}}" class="num">{{i}}</a>
+                    {%endfor%}
+                {%else%}
+                    <a href="/cf/problem/page/1" class="num">1</a>
+                    <a href="/cf/problem/page/2" class="num">2</a>
+                    <span>...</span>
+                    <a href="/cf/problem/page/{{page_id|add:-2}}" class="num">{{page_id|add:-2}}</a>
+                    <a href="/cf/problem/page/{{page_id|add:-1}}" class="num">{{page_id|add:-1}}</a>
+                    <a href="/cf/problem/page/{{page_id}}" class="on num"> {{page_id}}</a> 
+                    <a href="/cf/problem/page/{{page_id|add:1}}" class="num">{{page_id|add:1}}</a>
+                    <a href="/cf/problem/page/{{page_id|add:2}}" class="num">{{page_id|add:2}}</a>
+                    <span>...</span>
+                    <a href="/cf/problem/page/{{all_page|add:-1}}" class="num">{{all_page|add:-1}}</a>
+                    <a href="/cf/problem/page/{{all_page}}" class="num">{{all_page}}</a> 
+                {%endif%}
+            </div>
+    </div> 
+
+    <div class="right">
+        <div class="dif_filter">
+            <div class="title">Dif Filter</div>
+            <table style="margin: auto;">
+                <tr style="height: 20px;">
+                    <td >From: </td>
+                    <td><input id = "from" type="text" value="0"></td>
+                </tr>
+                <tr style="height: 20px;">
+                    <td>To: </td>
+                    <td><input id = "to" type="text" value="inf"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Apple" onclick="fun()">
+        </div>
+        <br>
+        <div class="tag_filter">
+            <div class="title">Tag Filter</div>
+            <table style="margin: auto;">
+                <tr>
+                    <td>Tag: </td>
+                    <td><input type="text" value="" id = "tags"></td>
+                </tr>
+                <tr><td></td>
+                    <td>
+                    <div>
+                    <select onchange="Add_tag()" id="tag_select">
+                        <option value=""></option>
+                        combine-tags-by-or
+                        <option value="combine-tags-by-or" title="*combine tags by OR">*combine tags by OR</option>
+                            <option value="2-sat" title="2-satisfiability">2-sat</option>
+                            <option value="binary search" title="Binary search">binary search</option>
+                            <option value="bitmasks" title="Bitmasks">bitmasks</option>
+                            <option value="brute force" title="Brute force">brute force</option>
+                            <option value="chinese remainder theorem" title="Сhinese remainder theorem">chinese remainder theorem</option>
+                            <option value="combinatorics" title="Combinatorics">combinatorics</option>
+                            <option value="constructive algorithms" title="Constructive algorithms">constructive algorithms</option>
+                            <option value="data structures" title="Heaps, binary search trees, segment trees, hash tables, etc">data structures</option>
+                            <option value="dfs and similar" title="Dfs and similar">dfs and similar</option>
+                            <option value="divide and conquer" title="Divide and Conquer">divide and conquer</option>
+                            <option value="dp" title="Dynamic programming">dp</option>
+                            <option value="dsu" title="Disjoint set union">dsu</option>
+                            <option value="expression parsing" title="Parsing expression grammar">expression parsing</option>
+                            <option value="fft" title="Fast Fourier transform">fft</option>
+                            <option value="flows" title="Graph network flows">flows</option>
+                            <option value="games" title="Games, Sprague–Grundy theorem">games</option>
+                            <option value="geometry" title="Geometry, computational geometry">geometry</option>
+                            <option value="graph matchings" title="Graph matchings, König's theorem, vertex cover of bipartite graph">graph matchings</option>
+                            <option value="graphs" title="Graphs">graphs</option>
+                            <option value="greedy" title="Greedy algorithms">greedy</option>
+                            <option value="hashing" title="Hashing, hashtables">hashing</option>
+                            <option value="implementation" title="Implementation problems, programming technics, simulation">implementation</option>
+                            <option value="interactive" title="Interactive problem">interactive</option>
+                            <option value="math" title="Mathematics including integration, differential equations, etc">math</option>
+                            <option value="matrices" title="Matrix multiplication, determinant, Cramer's rule, systems of linear equations">matrices</option>
+                            <option value="meet-in-the-middle" title="Meet-in-the-middle">meet-in-the-middle</option>
+                            <option value="number theory" title="Number theory: Euler function, GCD, divisibility, etc">number theory</option>
+                            <option value="probabilities" title="Probabilities, expected values, statistics, random variables, etc">probabilities</option>
+                            <option value="schedules" title="Scheduling Algorithms">schedules</option>
+                            <option value="shortest paths" title="Shortest paths on weighted and unweighted graphs">shortest paths</option>
+                            <option value="sortings" title="Sortings, orderings">sortings</option>
+                            <option value="string suffix structures" title="Suffix arrays, suffix trees, suffix automatas, etc">string suffix structures</option>
+                            <option value="strings" title="Prefix- and Z-functions, suffix structures, Knuth–Morris–Pratt algorithm, etc">strings</option>
+                            <option value="ternary search" title="Ternary search">ternary search</option>
+                            <option value="trees" title="Trees">trees</option>
+                            <option value="two pointers" title="Two pointers">two pointers</option>
+                    </select></div>
+                </td></tr>   
+            </table>
+            <input type="submit" value="Apple" onclick="fun_tag()">
+        </div>
+    </div>
+</div>
+</div>

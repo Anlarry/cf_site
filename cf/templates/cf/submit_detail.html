@@ -1,0 +1,18 @@
+<div style="text-align: left;margin:0 auto;width: 50%;">
+    <pre>{{src}}</pre>
+</div>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="80%" color=#987cb9 SIZE=3>
+<div style="margin: 0 auto;width: 50%; text-align: left;">
+    {%for in,out,ans,sta in test_data%} 
+        <h5 style="text-align: left;">input</h5>
+        <div style="text-align: left;"><pre>{{in}}</pre></div>
+        <h5 style="text-align: left;">output</h5>
+        <div style="text-align: left;"><pre>{{out}}</pre></div>
+        <h5 style="text-align: left;">answer</h5>
+        <div style="text-align: left;"><pre>{{ans}}</pre></div>
+        <h5 style="text-align: left;">status</h5>
+        <div style="text-align: left;"><pre>{{sta}}</pre></div>
+        <HR style="BORDER-RIGHT: #00686b 1px dotted; BORDER-TOP: #00686b 1px dotted; BORDER-LEFT: #00686b 1px dotted; BORDER-BOTTOM: #00686b 1px dotted" noShade SIZE=1>
+
+    {%endfor%}
+</div>

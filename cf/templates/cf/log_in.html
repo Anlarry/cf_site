@@ -1,0 +1,28 @@
+<div style="margin:auto; text-align: center; width: 30%;position:absolute;top:200px;left:200px;right:200px;bottom:200px;">
+    {%if name != ""%}
+        <h5>Hi {{name}}</h5>
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#987cb9 SIZE=3>
+    {%endif%}
+    <form action="" method="POST" >
+        {% csrf_token %}
+        <tbody>
+            <table style="margin: auto;">
+                <tr style="height: 20px;">
+                    <td><label for="name">Name: </label></td>
+                    <td><input id="name" type="text" name="name"></td> 
+                </tr>
+                <tr style="height: 20px;">
+                    <td><label for="password">Password: </label></td>
+                    <td><input id="password" type="password" name="password"></td> 
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="Submit" style="text-align: center;">
+            <div style="text-align: right;">
+                <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#987cb9 SIZE=3>
+                <a href="{%url 'register' %}">Register</a>
+            </div>
+        </tbody>
+        
+    </form>
+</div>

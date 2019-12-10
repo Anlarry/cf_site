@@ -1,0 +1,33 @@
+<h1 style="text-align: center;">CF </h1>
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="80%" color=#987cb9 SIZE=3>
+
+<div style="margin:0 auto;width: 80%;text-align: left; ">
+    <h5>
+        <div style="float: left;">
+        <a href="{%url 'title' %}" style="text-decoration: none;color: #333333;">Problem </a>&nbsp; &nbsp; 
+        <a href="{%url 'log_in'%}" style="text-decoration: none;color: #333333;">Log_In </a>&nbsp; &nbsp;
+        <a href="" style="text-decoration: none;color: #333333;";>{{name}}</a>
+        </div>
+        <div style="float: right;">
+        {%if name != "" and name != None %}
+            <a href="{%url 'log_out'%}" style="text-decoration: none;color: #333333;">Log_out</a>
+        {%endif%}
+        </div>
+    </h5>
+</div>
+<br><br>
+<style>
+    .news
+    {
+        /* box-shadow: #c7c7c7 0px 0px 18px; */
+        width: 300px;
+        height: 50px;
+    }
+</style>
+<div style="margin: auto; width: 80%; text-align: left;">
+    {%for new in news%}
+        <div class="news">
+        <a href="{%url 'news' new.id%}" style="text-decoration: none;"> {{new.title}}</a>
+        </div>
+    {%endfor%}
+</div>

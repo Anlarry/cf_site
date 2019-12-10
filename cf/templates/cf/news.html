@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <!-- <link href="https://cdn.rawgit.com/google/code-prettify/master/loader/skins/desert.css" rel="stylesheet"> -->
+
+    <!-- <link href="/static/css/highlights/github.css"/> -->
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+    </script>
+    <style>
+        .main
+        {
+            width: 95%;
+            text-align: left;
+            margin: auto;
+        }
+        .title{
+            /* width : 50%; */
+            text-align: center;
+            margin: auto;
+        }
+
+        /* code style: */
+        pre.prettyprint, code.prettyprint {
+            background-color: #f6f8fa;
+            border-radius: 8px;
+            width: 95%;
+            margin: 1em auto;
+            padding: 1em;
+            white-space: pre-wrap;
+            border: none;
+        }
+        
+    </style>
+
+</head>
+<body>
+<div class ="title">
+    <h1>{{title}}</h1>
+    <HR style="color: rgb(28, 132, 230);width: 80%;size: 3;FILTER: alpha(opacity=100,finishopacity=0,style=1)"> 
+    <!-- <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="80%" SIZE=3 "> -->
+</div>
+<div style="box-shadow: #c7c7c7 0px 0px 18px; margin: auto; width: 50%;">
+    <div class="main">
+    {{ html | safe }}
+    </div>
+    <br>
+</div>
+</body>
+</html>
