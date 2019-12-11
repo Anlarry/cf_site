@@ -24,7 +24,7 @@ def get_ordered_pro():
 def get_pro_detail(url):
     try:
         pro_detail = problem_detail.objects.get(url=url)
-        update_problem_detail.delay(url=pro_detail.url,has_detail=True)
+        # update_problem_detail(url=pro_detail.url,has_detail=True)
     except problem_detail.DoesNotExist:
         pro_detail = update_problem_detail(url=url)
     return pro_detail

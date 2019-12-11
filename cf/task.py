@@ -76,17 +76,18 @@ def update_problem_detail(url, has_detail=False):
     # print('update problem')
     T = Get_pro_detail(url='http://codeforces.com/'+url)
     if has_detail:
-        the_pro_detail = problem_detail.objects.get(url=url)
-        if (the_pro_detail.text != T.text or the_pro_detail.in_file != T.in_file or
-            the_pro_detail.out_file != T.out_file or the_pro_detail.time_lim != T.time_lim
-            or the_pro_detail.mem_lim != T.mem_lim):
-            the_pro_detail.mem_lim = T.mem_lim
-            the_pro_detail.time_lim = T.time_lim
-            the_pro_detail.in_file = T.in_file
-            the_pro_detail.out_file = T.out_file
-            the_pro_detail.text = T.text
-            the_pro_detail.save()
-            print('New problem detail %s'%url)
+        pass
+        # the_pro_detail = problem_detail.objects.get(url=url)
+        # if (the_pro_detail.text != T.text or the_pro_detail.in_file != T.in_file or
+        #     the_pro_detail.out_file != T.out_file or the_pro_detail.time_lim != T.time_lim
+        #     or the_pro_detail.mem_lim != T.mem_lim):
+        #     the_pro_detail.mem_lim = T.mem_lim
+        #     the_pro_detail.time_lim = T.time_lim
+        #     the_pro_detail.in_file = T.in_file
+        #     the_pro_detail.out_file = T.out_file
+        #     the_pro_detail.text = T.text
+        #     the_pro_detail.save()
+        #     print('New problem detail %s'%url)
     else:
         now_pro_detail = problem_detail(url=url, time_lim=T.time_lim,mem_lim=T.mem_lim,in_file=T.in_file,out_file=T.out_file, text=T.text) 
         now_pro_detail.save()

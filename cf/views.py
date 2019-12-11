@@ -71,13 +71,13 @@ def register(request):
 def title(request):
     if len(problem.objects.all()) == 0:
         load_problem()
-    updata_res = update_problem.delay()
+    updata_res = update_problem()
     # update_problem()
     # pros = problem.objects.all()[:100]
     pros = get_ordered_pro()[:100]
     all_page = (len(problem.objects.all()) + 99)// 100
     print('*****', all_page)
-    res = add.delay(4, 4)
+    res = add(4, 4)
     # print(res.ready()) 
     return render(request, 'cf/title.html', {
         'title':'CF problem here','pros':pros, 'page_id':1, 'all_page':all_page,
@@ -108,7 +108,7 @@ def problem_page(request, pro_id):
     if name != "":
         try:
             last_sta = user_problem_status.objects.get(name=name,pro_id=pro_id)
-            update_submit_status.delay(name, request.session['password'],pro_id, contest_id, last_sta.last_id)        
+            update_submit_status(name, request.session['password'],pro_id, contest_id, last_sta.last_id)        
             sta = last_sta.last_sta
             is_ac = last_sta.is_ac
             last_submit_id = last_sta.last_id
@@ -125,7 +125,7 @@ def problem_page(request, pro_id):
             src = request.POST.get('code')
             # user = User.objects.get(username=name)
             password = request.session['password']
-            submit.delay(name, password, pro_id, src)
+            submit(name, password, pro_id, src)
             # request.method='GET'
             return redirect('/cf/problem/'+pro_id)
             # return render(request, 'cf/problem_page.html',{

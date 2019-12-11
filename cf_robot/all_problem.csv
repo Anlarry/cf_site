@@ -11,7 +11,7 @@
 9,5607,1267C,Cactus Revenge,constructive algorithms,,/problemset/problem/1267/C
 10,5606,1267B,Balls of Buma,,,/problemset/problem/1267/B
 11,5605,1267A,Apprentice Learning Trajectory,,,/problemset/problem/1267/A
-12,5604,1265E,Beautiful Mirrors,"data structures,probabilities",2100,/problemset/problem/1265/E
+12,5604,1265E,Beautiful Mirrors,"data structures,dp,probabilities",2100,/problemset/problem/1265/E
 13,5603,1265B,Beautiful Numbers,"data structures,implementation,math,two pointers",1300,/problemset/problem/1265/B
 14,5602,1265A,Beautiful String,"constructive algorithms,greedy",1000,/problemset/problem/1265/A
 15,5601,1264F,Beautiful Fibonacci Problem,"constructive algorithms,number theory",3600,/problemset/problem/1264/F
@@ -5563,7 +5563,7 @@
 5561,55,13A,Numbers,"implementation,math",1200,/problemset/problem/13/A
 5562,54,12E,Start of the session,constructive algorithms,2100,/problemset/problem/12/E
 5563,53,12D,Ball,"data structures,sortings",2400,/problemset/problem/12/D
-5564,52,12C,Fruits,"implementation,sortings",1400,/problemset/problem/12/C
+5564,52,12C,Fruits,"greedy,implementation,sortings",1400,/problemset/problem/12/C
 5565,51,12B,Correct Solution?,"implementation,sortings",1400,/problemset/problem/12/B
 5566,50,12A,Super Agent,implementation,1100,/problemset/problem/12/A
 5567,49,11E,"Forward, march!","binary search,dp,greedy",2800,/problemset/problem/11/E
