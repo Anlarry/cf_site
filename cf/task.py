@@ -60,7 +60,7 @@ def update_problem():
             print('Save New', each['pro_id'], each['url'])
         now_id += 1
     data = pd.DataFrame({'my_id':my_ids,'pro_id':ids, 'name':names, 'tags':tags, 'dif':dif, 'url':urls})
-    data.to_csv('cf_robot/all_problem.csv')
+    # data.to_csv('cf_robot/all_problem.csv')
     # for i in range(1, all_pages+1):
     #     now_page_pro = Get_problem.get_page_pro(i)
     #     print('----Update Page %d----'%i)
