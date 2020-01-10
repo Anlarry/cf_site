@@ -122,8 +122,13 @@ class Log_Submit:
         res = self.s.get(url)
         print(res)
         html = res.text
+<<<<<<< HEAD
         #with open('cf_robot/tmp.html', 'w') as F:
         #    print(html, file=F)
+=======
+        # with open('cf_robot/tmp.html', 'w') as F:
+        #     print(html, file=F)
+>>>>>>> origin/no_celery
         bs = BeautifulSoup(html, "lxml")
         self.submit_id = bs.find(attrs={'class':'hiddenSource'}).get_text()
         verdict = bs.find(attrs={'submissionid':self.submit_id}).get_text()
