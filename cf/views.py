@@ -110,13 +110,18 @@ def problem_page(request, pro_id):
             last_sta = user_problem_status.objects.get(name=name,pro_id=pro_id)
             update_submit_status(name, request.session['password'],pro_id, contest_id, last_sta.last_id)        
             sta = last_sta.last_sta
+            tim = last_sta.time
+            mem = last_sta.memory
             is_ac = last_sta.is_ac
             last_submit_id = last_sta.last_id
         except user_problem_status.DoesNotExist:
             sta = ""
+            tim, mem = "", ""
             is_ac = False
     else:
         sta = ""
+        tim = ""
+        mem = ""
         is_ac = False
     if sta == "":
         last_submit_id = 0
@@ -152,6 +157,8 @@ def problem_page(request, pro_id):
             'in_file':pro_detail.in_file,
             'out_file':pro_detail.out_file,
             'status':sta,
+            'time':tim,
+            'memory':mem,
             "is_ac":is_ac,
             'last_submit_id':last_submit_id,
             'contest_id':int(contest_id),

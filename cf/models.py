@@ -53,6 +53,8 @@ class user_problem_status(models.Model):
     name = models.CharField(max_length=200)
     last_sta = models.CharField(max_length=200)
     is_ac = models.BooleanField(default=False)
+    time = models.CharField(max_length=200)
+    memory = models.CharField(max_length=200)
     last_id = models.IntegerField(default=0)
 
 class news(models.Model):

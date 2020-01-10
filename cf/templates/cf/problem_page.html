@@ -115,10 +115,14 @@ function hide()  //去除隐藏层和弹出层
         <td style="width: 100px;">Status</td>
         {%if status == None or status == "" %}
             <td style="width: 100px; text-align: center;">======</td>
+            <td style="width: 60px; text-align: center;">===</td>
+            <td style="width: 60px; text-align: center;">===</td>
         {%elif last_submit_id == 0%}
             <td style="width: 100px; cursor: pointer;">{{status}}</td>
         {%else%}
             <td style="width: 100px; cursor: pointer;" onclick="submit_detail_win()">{{status}}</td>
+            <td style="width: 60px; text-align: center;">{{time}}<td>
+            <td style="width: 60px; text-align: center;">{{memory}}<td>
         {%endif%}
         <td style="width: 100px;"><div onclick="show()" style="cursor: pointer;">Code</div></td>
             <td style="width: 100px;"><input type="submit" value="Submit" style="text-align:right;margin: auto;"></td>

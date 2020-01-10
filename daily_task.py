@@ -12,7 +12,3 @@ from cf.models import problem, problem_detail, user_problem_status
 from cf.task import update_problem
 
 update_problem()
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/no_celery

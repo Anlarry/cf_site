@@ -60,11 +60,7 @@ def update_problem():
             print('Save New', each['pro_id'], each['url'])
         now_id += 1
     data = pd.DataFrame({'my_id':my_ids,'pro_id':ids, 'name':names, 'tags':tags, 'dif':dif, 'url':urls})
-<<<<<<< HEAD
-    #data.to_csv('cf_robot/all_problem.csv')
-=======
     # data.to_csv('cf_robot/all_problem.csv')
->>>>>>> origin/no_celery
     # for i in range(1, all_pages+1):
     #     now_page_pro = Get_problem.get_page_pro(i)
     #     print('----Update Page %d----'%i)
@@ -109,11 +105,12 @@ def submit(name, password, pro_id, scr):
     ok = ok and T.submit(pro_id, scr, lan=54)
     if ok :
         time.sleep(2)
-        res = T.get_submit_result()
+        res, tim, mem = T.get_submit_result()
         now_id = T.submit_id
         ac = 'Accept' in res
     else :
         res = 'submit Fail'
+        tim, mem = "", ""
         now_id = "0"
         ac = False
     try :
@@ -121,10 +118,12 @@ def submit(name, password, pro_id, scr):
         last_sub.last_sta = res
         last_sub.is_ac = last_sub.is_ac or ac
         last_sub.last_id = now_id
+        last_sub.time = tim
+        last_sub.memory = mem
         last_sub.save()
         print('try again', res)
     except user_problem_status.DoesNotExist:
-        now_sub = user_problem_status(name=name, pro_id=pro_id,last_sta=res, is_ac = ac, last_id=now_id)
+        now_sub = user_problem_status(name=name, pro_id=pro_id,last_sta=res, is_ac = ac, last_id=now_id, time=tim,memory=mem)
         now_sub.save()
         print('first submit', res)
 
@@ -136,9 +135,9 @@ def update_submit_status(name, password,pro_id, contest_id, last_sub_id):
         return
     print('updata submit status')
     last_sub_sta = user_problem_status.objects.get(name=name, pro_id=pro_id) 
-    last_sub_sta.last_sta = get_status_by_id(str(contest_id), str(last_sub_id))
+    last_sub_sta.last_sta,last_sub_sta.time,last_sub_sta.memory = get_status_by_id(str(contest_id), str(last_sub_id))
     last_sub_sta.is_ac = last_sub_sta.is_ac or ('Accept' in last_sub_sta.last_sta)
-    print(last_sub_sta.last_sta)
+    print(last_sub_sta.last_sta, last_sub_sta.time, last_sub_sta.memory)
     last_sub_sta.save()
 # ids, names, tags, dif = [], [], [], []
 # for each in T.problem:

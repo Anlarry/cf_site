@@ -11,8 +11,10 @@ def get_status_by_id(contest_id, sub_id):
     bs = BeautifulSoup(html, "lxml")
     tag = bs.find(lambda x: x.get_text()==sub_id)
     new_sta = tag.parent.find_all('td')[4].get_text()
+    tim = tag.parent.find_all('td')[5].get_text()
+    mem = tag.parent.find_all('td')[6].get_text()
     new_sta = new_sta.strip()
-    return new_sta
+    return new_sta, tim, mem
 # get_status_by_id('1257', '66111825')
 # 1257 
 # 66111825

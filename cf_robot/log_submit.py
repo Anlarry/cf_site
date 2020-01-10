@@ -122,18 +122,16 @@ class Log_Submit:
         res = self.s.get(url)
         print(res)
         html = res.text
-<<<<<<< HEAD
-        #with open('cf_robot/tmp.html', 'w') as F:
-        #    print(html, file=F)
-=======
         # with open('cf_robot/tmp.html', 'w') as F:
         #     print(html, file=F)
->>>>>>> origin/no_celery
         bs = BeautifulSoup(html, "lxml")
         self.submit_id = bs.find(attrs={'class':'hiddenSource'}).get_text()
         verdict = bs.find(attrs={'submissionid':self.submit_id}).get_text()
-        print(verdict)
-        return verdict
+        tag = bs.find(attrs={'data-submission-id':self.submit_id})
+        tim = tag.find(attrs={'time-consumed-cell'}).get_text().strip()
+        mem = tag.find(attrs={'memory-consumed-cell'}).get_text().strip()
+        print(verdict, tim, mem)
+        return verdict, tim, mem
     def get_status(self):
         url = "https://codeforces.com/data/submitSource"
         agent = random.choice(user_agent)
@@ -191,3 +189,4 @@ class Log_Submit:
 # T.get_status()
 # T = Log_Submit('__Wind__', '654183')
 # T.get_status_by_id('1257', '66111825')
+# T.get_submit_result()
