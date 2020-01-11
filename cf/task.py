@@ -136,7 +136,7 @@ def update_submit_status(name, password,pro_id, contest_id, last_sub_id):
     print('updata submit status')
     last_sub_sta = user_problem_status.objects.get(name=name, pro_id=pro_id) 
     last_sub_sta.last_sta,last_sub_sta.time,last_sub_sta.memory = get_status_by_id(str(contest_id), str(last_sub_id))
-    last_sub_sta.is_ac = last_sub_sta.is_ac or ('Accept' in last_sub_sta.last_sta)
+    last_sub_sta.is_ac = last_sub_sta.is_ac or ('Accept' in last_sub_sta.last_sta) or ('Happy New Year' in last_sub_sta.last_sta)
     print(last_sub_sta.last_sta, last_sub_sta.time, last_sub_sta.memory)
     last_sub_sta.save()
 # ids, names, tags, dif = [], [], [], []
