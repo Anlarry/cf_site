@@ -107,7 +107,7 @@ def submit(name, password, pro_id, scr):
         time.sleep(2)
         res, tim, mem = T.get_submit_result()
         now_id = T.submit_id
-        ac = 'Accept' in res
+        ac = 'Accept' in res or 'Happy New Year' in res
     else :
         res = 'submit Fail'
         tim, mem = "", ""
