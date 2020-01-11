@@ -125,8 +125,12 @@ class Log_Submit:
         # with open('cf_robot/tmp.html', 'w') as F:
         #     print(html, file=F)
         bs = BeautifulSoup(html, "lxml")
-        self.submit_id = bs.find(attrs={'class':'hiddenSource'}).get_text()
-        verdict = bs.find(attrs={'submissionid':self.submit_id}).get_text()
+        try :
+            self.submit_id = bs.find(attrs={'class':'hiddenSource'}).get_text()
+            verdict = bs.find(attrs={'submissionid':self.submit_id}).get_text()
+        except AttributeError:
+            self.submit_id = bs.find(attrs={'class':'view-source'}).get_text()
+            verdict = bs.find(attrs={'class':'verdict-rejected'}).get_text()
         tag = bs.find(attrs={'data-submission-id':self.submit_id})
         tim = tag.find(attrs={'time-consumed-cell'}).get_text().strip()
         mem = tag.find(attrs={'memory-consumed-cell'}).get_text().strip()
