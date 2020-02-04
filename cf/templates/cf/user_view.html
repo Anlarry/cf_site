@@ -1,0 +1,24 @@
+<h2>Solved</h2>
+<table class="array">
+{% for each in solved %}
+    <tr class="item">
+    {% for pro_id in each%}
+        <td>
+            <a href="/cf/problem/{{pro_id}}/">{{pro_id}}</a>
+        </td> 
+    {% endfor%}
+    </tr>
+{%endfor%}
+</table>
+<h2> Unsolved</h2>
+<table class="array">
+    {% for each in unsolved %}
+        <tr class="item">
+        {% for pro_id in each%}
+            <td>
+                <a href="/cf/problem/{{pro_id}}/">{{pro_id}}</a>
+            </td> 
+        {%endfor%}
+        </tr>
+    {%endfor%}
+    </table>
