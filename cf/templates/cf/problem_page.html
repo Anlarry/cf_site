@@ -12,7 +12,13 @@
     .problem_elem
     {
         width: 70%;
-        margin:0 auto;
+        margin:2em auto;
+        background-color: #ddeeff;
+        border-radius: 8px;
+        padding: 2em;
+    }
+    .problem_elem .sample-test{
+        background-color: #ddeeff; 
     }
     .title
     {
@@ -93,6 +99,7 @@
 <div style="text-align: center; ">
     <a href="http://codeforces.com/{{url}}" style="text-decoration: none;">CF 链接</a>
     <a href="https://vjudge.net/problem/CodeForces-{{pro_id}}" style="text-decoration: none;">VJ 链接</a>
+    <a href="{%url 'tutorial_page' pro_id%}" style="text-decoration: none;">Tutotial</a>
 </div>
 <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color=#987cb9 SIZE=3>
 

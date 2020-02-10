@@ -1,0 +1,52 @@
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$$$','$$$']], displayMath: [['$$$$$$','$$$$$$']]}
+    });
+    </script>
+    <script type="text/javascript" async
+            src="https://cdn.bootcss.com/mathjax/2.7.2-rc/MathJax.js?config=TeX-AMS_HTML-full"
+    >
+    </script>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+<style>
+    .main {
+        width: 1250;
+        margin: auto;
+    }
+    .main .tutorial{
+        background-color: #ddeeff;
+        width: 80%;
+        margin: 2em auto;
+        border-radius: 8px;
+        padding: 2em;
+    }
+    .main .code{
+        margin: auto;
+    }
+    pre.prettyprint, code.prettyprint {
+            background-color: #f6f8fa;
+            border-radius: 8px;
+            width: 80%;
+            margin: 1em auto;
+            padding: 1em;
+            white-space: pre-wrap;
+            border: none;
+       }
+</style>
+
+<div class="main">
+    <div class = "tutorial">
+        {{tutorial_html|safe}}
+    </div>
+
+    <HR style="BORDER-RIGHT: #00686b 1px dotted; BORDER-TOP: #00686b 1px dotted; BORDER-LEFT: #00686b 1px dotted; BORDER-BOTTOM: #00686b 1px dotted" noShade SIZE=1>
+    <div class="code">
+        <pre class="prettyprint">
+            {{code}}
+        </pre>
+    </div>
+</div>
+
+

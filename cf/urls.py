@@ -1,6 +1,7 @@
 from django.urls import path,re_path
 from . import views
-from . import filter_views, user_view
+from . import filter_views, user_view,tutorial_view
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('<str:name>', user_view.user_view, name='user_page'),
@@ -10,6 +11,7 @@ urlpatterns = [
     path('problem/dif-<str:from_dif>-<str:to_dif>/page/<int:page_id>/',filter_views.dif_filter, name='dif_filter'),
     path('problem/tag-<str:tags>/page/<int:page_id>/', filter_views.tag_filter, name='tag_filter'),
     path('problem/<str:pro_id>/', views.problem_page, name='problem_page'),
+    path('tutorial/<str:pro_id>/', tutorial_view.tutorial_view, name='tutorial_page'),
     path('log_in/', views.log_in, name='log_in'),
     path('register/', views.register, name='register'),
     path('logout/', views.log_out, name='log_out'),
