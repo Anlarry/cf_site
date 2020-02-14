@@ -95,14 +95,14 @@ def update_problem_detail(url, has_detail=False):
         return now_pro_detail
 
 @shared_task
-def submit(name, password, pro_id, scr):
+def submit(name, password, pro_id, scr, language):
     print(name+' try '+pro_id)
     T = Log_Submit(name,password)
     ok = T.login()
     if scr == "" or scr == None:
         print('scr is ""')
         return
-    ok = ok and T.submit(pro_id, scr, lan=54)
+    ok = ok and T.submit(pro_id, scr, lan=language)
     if ok :
         time.sleep(2)
         res, tim, mem = T.get_submit_result()

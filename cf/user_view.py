@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from .model_funs import get_ordered_pro,get_pro_detail
 from django.contrib.auth import login, authenticate,logout
 from cf_robot.get_submit_detail import get_submit_detail
+from cf_robot.get_user_submission import GetUserSubmission
 from django.template.loader import get_template
 import markdown
 
@@ -20,9 +21,11 @@ def user_view(request, name):
     unsolved = sorted(unsolved, key=lambda x: problem.objects.get(pro_id=x).my_id, reverse=True)
     solved = [solved[i:i+10] for i in range(0, len(solved), 10)]
     unsolved = [unsolved[i:10] for i in range(0, len(unsolved), 10)]
+    submission_html = GetUserSubmission(name, request.session['password']).submission_html
     return render(request, 'cf/user_view.html',{
         'name':name,
         'submissions':submissions,
         'solved':solved,
         'unsolved':unsolved,
+        'submission_html':submission_html,
     })

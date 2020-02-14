@@ -1,3 +1,15 @@
+<style>
+    .main{
+        width: 1250px;
+        background-color: #ddeeff;
+        margin: 2em auto;
+        border-radius: 8px;
+        padding: 2em;
+    }
+</style>
+
+
+<div class="main">
 <h2>Solved</h2>
 <table class="array">
 {% for each in solved %}
@@ -22,3 +34,10 @@
         </tr>
     {%endfor%}
     </table>
+
+<h2>Recent Submitssions</h2>
+<div class="submission">
+
+    {{submission_html|safe}}
+</div>
+</div>

@@ -130,7 +130,8 @@ def problem_page(request, pro_id):
             src = request.POST.get('code')
             # user = User.objects.get(username=name)
             password = request.session['password']
-            submit(name, password, pro_id, src)
+            language = request.POST.get('Language')
+            submit(name, password, pro_id, src, language)
             # request.method='GET'
             return redirect('/cf/problem/'+pro_id)
             # return render(request, 'cf/problem_page.html',{
