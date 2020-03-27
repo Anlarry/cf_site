@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import problem, user_problem_status, news
 from .load_problem import load_problem
 from .task import update_problem,add,submit,update_submit_status
@@ -10,6 +10,7 @@ from django.contrib.auth import login, authenticate,logout
 from cf_robot.get_submit_detail import get_submit_detail
 from django.template.loader import get_template
 import markdown
+from cf_robot.Updata_status import get_status_by_id
 # from cf_robot.log_submit import Log_Submit 
 # Create your views here.
 
@@ -19,8 +20,8 @@ def home(request):
         name = request.session['name']
     except KeyError:
         name = ""
-    # the_news = sorted(list(news.objects.all()), lambda x: x.id, reversed=True)[:5]
-    the_news = news.objects.order_by('-id')[:5]
+    the_news = sorted(list(news.objects.all()), key=lambda x: (x.top, x.id),reverse=True)[:10]
+    # the_news = news.objects.order_by('-id')[:10]
     return render(request, 'cf/home.html',{
         'name': name,
         'news':the_news,
@@ -149,6 +150,7 @@ def problem_page(request, pro_id):
             return redirect('/cf/log_in/')
     else:
         return render(request, 'cf/problem_page.html',{
+            'user':name,
             'name':pro.name,
             'url':pro.url,
             'pro_id':pro_id,
@@ -202,3 +204,20 @@ def news_page(request, news_id):
         'html':html,
         'title':new.title,
     })
+
+def status(request):
+    contest_id = request.POST['contest_id']
+    submit_id = request.POST['submit_id']
+    user = request.POST['user']
+    pro_id = request.POST['pro_id']
+    verdict, time, memory = get_status_by_id(contest_id, submit_id)
+    last_sub_sta = user_problem_status.objects.get(name=user, pro_id=pro_id) 
+    last_sub_sta.last_sta, last_sub_sta.time, last_sub_sta.memory = verdict, time, memory
+    last_sub_sta.is_ac = last_sub_sta.is_ac or ('Accept' in last_sub_sta.last_sta) or ('Happy New Year' in last_sub_sta.last_sta)
+    last_sub_sta.save()
+    return JsonResponse({
+        'verdict':verdict,
+        'time':time,
+        'memory':memory
+    })
+    

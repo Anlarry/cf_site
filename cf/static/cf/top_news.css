@@ -1,0 +1,32 @@
+.top_tag{
+    background: rgb(60, 206, 255);
+    border-radius: 3px;
+}
+
+.line{
+    width: 10px;
+    height: 70px;
+    background-color: #1f8fff;
+}
+
+.news
+{
+    /* box-shadow: #c7c7c7 0px 0px 18px; */
+    width: 500px;
+    height: 70px;
+    /* background-color: #ddeeff; */
+    margin-bottom: 20px;
+    background-color: #ddeeff;
+}
+
+
+.news:hover{
+
+-webkit-box-shadow: #ccc 0px 10px 10px;
+
+-moz-box-shadow: #ccc 0px 10px 10px;
+
+box-shadow: #ccc 0px 10px 10px;  
+
+
+}

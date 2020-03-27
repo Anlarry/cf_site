@@ -18,4 +18,5 @@ urlpatterns = [
     path('log_in/<str:name>', views.log_in),
     path('submit/<int:contest_id>/<int:submit_id>/', views.submit_detail, name='submit_detail'),
     path('news/<int:news_id>/', views.news_page, name='news'),
+    path('status/', views.status, name="status"),
 ]

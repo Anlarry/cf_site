@@ -60,6 +60,7 @@ class user_problem_status(models.Model):
 class news(models.Model):
     title = models.CharField(max_length = 200,default = "")
     text = models.TextField()
+    top = models.BooleanField(default=False)
     def __str__(self):
         return self.title
      

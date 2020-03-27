@@ -21,12 +21,14 @@ def get_submit_detail(contest_id,submit_id):
     res = s.post(url, data=data)
     res = eval(res.text)
     source = res['source']
+    verdict_tag_bs = BeautifulSoup(res['verdict'], 'lxml')
+    verdict = verdict_tag_bs.get_text()
     in_out_data = []
     tests_count = int(res['testCount'])
     for i in range(1, 1+tests_count):
         in_out_data.append({"input":res['input#'+str(i)], "output":res['output#'+str(i)], "answer":res['answer#'+str(i)], 'status':res['checkerStdoutAndStderr#'+str(i)]})
     # print(source, '\n', in_out_data)
-    return {"source":source, "test_data":in_out_data}
+    return {"source":source, "test_data":in_out_data, 'verdict':verdict}
 
 # res = get_submit_detail('66184913')
 # print(res['source'])

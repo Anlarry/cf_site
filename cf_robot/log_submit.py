@@ -130,7 +130,11 @@ class Log_Submit:
             verdict = bs.find(attrs={'submissionid':self.submit_id}).get_text()
         except AttributeError:
             self.submit_id = bs.find(attrs={'class':'view-source'}).get_text()
-            verdict = bs.find(attrs={'class':'verdict-rejected'}).get_text()
+            tag = bs.find(attrs={'data-submission-id':self.submit_id})
+            verdict = tag.find(attrs={'data-submission-id':self.submit_id})
+            if verdict == None:
+                verdict = 'Running'
+            # verdict = bs.find(attrs={'class':'verdict-rejected'}).get_text()
         tag = bs.find(attrs={'data-submission-id':self.submit_id})
         tim = tag.find(attrs={'time-consumed-cell'}).get_text().strip()
         mem = tag.find(attrs={'memory-consumed-cell'}).get_text().strip()
@@ -194,3 +198,5 @@ class Log_Submit:
 # T = Log_Submit('__Wind__', '654183')
 # T.get_status_by_id('1257', '66111825')
 # T.get_submit_result()
+
+
