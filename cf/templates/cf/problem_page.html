@@ -173,11 +173,14 @@ $(document).ready(function() {
     <table style="margin: auto; text-align: center;">
         <tr>
         <td>
+            <div id="ac_div" style="width: 12px;height: 12px;border-radius: 100%;background:rgb(7, 197, 64); display: none;"></div>
+        </td>
+        <td>  
             <div class="spinner" style="display: none;">
                 <div class="double-bounce1"></div>
                 <div class="double-bounce2"></div>
             </div>
-            <div id="ac_div" style="width: 12px;height: 12px;border-radius: 100%;background:rgb(7, 197, 64); display: none;"></div>
+            
         </td>
         <td style="width: 100px;">Status</td>
         {%if status == None or status == "" %}
