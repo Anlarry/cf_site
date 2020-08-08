@@ -18,11 +18,6 @@ class Get_pro_detail:
         for each in all_tag.div.next_siblings:
             self.text += str(each)
 
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 4803ba92196ea4ff5121874eb8db882dcca1f722
 
 # T = Get_pro_detail('http://codeforces.com//problemset/problem/1261/F')
 

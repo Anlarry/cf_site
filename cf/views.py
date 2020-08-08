@@ -80,22 +80,55 @@ def title(request):
     print('*****', all_page)
     res = add(4, 4)
     # print(res.ready()) 
-    return render(request, 'cf/title.html', {
-        'title':'CF problem here','pros':pros, 'page_id':1, 'all_page':all_page,
-        'range_1_to_now_page':range(1,1+1),
-        'range_now_page_to_all':range(1, all_page)
-       })
+    try :
+        name = request.session['name']
+        for i in range(len(pros)):
+            try :
+                pros[i].is_ac = user_problem_status.objects.get(name=name, pro_id=pros[i].pro_id).is_ac
+            except user_problem_status.DoesNotExist :
+                pros[i].is_ac = False
+        return render(request, 'cf/title.html', {
+            'title':'CF problem here' , 
+            'pros' : pros, 
+            'page_id':1, 
+            'all_page' : all_page ,
+            'range_1_to_now_page':range(1,1+1),
+            'range_now_page_to_all':range(1, all_page),
+        })
+    except KeyError :
+        for i in range(len(pros)):
+            pros[i].is_ac = False
+        return render(request, 'cf/title.html', {
+            'title':'CF problem here','pros':pros, 'page_id':1, 'all_page':all_page,
+            'range_1_to_now_page':range(1,1+1),
+            'range_now_page_to_all':range(1, all_page)
+        })
     # return HttpResponse('All CF problem here')
 
 def page(request, page_id):
     all_pro = len(problem.objects.all())
     all_page = (len(problem.objects.all()) + 99)// 100
     pros = get_ordered_pro()[100*page_id-100:min(100*page_id, all_pro)]
-    return render(request, 'cf/title.html', {
-        'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
-        'range_1_to_now_page':range(1,page_id+1),
-        'range_now_page_to_all':range(page_id+1, all_page+1)
-       }) 
+    try :
+        name = request.session['name']
+        for i in range(len(pros)):
+            try :
+                pros[i].is_ac = user_problem_status.objects.get(name=name, pro_id=pros[i].pro_id).is_ac
+            except user_problem_status.DoesNotExist :
+                pros[i].is_ac = False
+        return render(request, 'cf/title.html', {
+            'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
+            'range_1_to_now_page':range(1,page_id+1),
+            'range_now_page_to_all':range(page_id+1, all_page+1)
+        }) 
+    except KeyError :
+        for i in range(len(pros)):
+            pros[i].is_ac = False
+        return render(request, 'cf/title.html', {
+            'title':'CF problem here','pros':pros, 'page_id':1, 'all_page':all_page,
+            'range_1_to_now_page':range(1,1+1),
+            'range_now_page_to_all':range(1, all_page)
+        })
 
 def problem_page(request, pro_id):
     pro = problem.objects.get(pro_id=pro_id)

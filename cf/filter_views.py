@@ -21,12 +21,28 @@ def dif_filter(request, from_dif, to_dif,page_id):
         all_pro = sorted(all_pro, key=lambda x: x.my_id,reverse=True)
         all_page = (len(all_pro) + 99) // 100
         pros = all_pro[100*page_id-100:min(100*page_id, len(all_pro))]
-        return render(request, 'cf/filter.html', {
-            'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
-            'range_1_to_now_page':range(1,page_id+1),
-            'range_now_page_to_all':range(page_id+1, all_page+1),
-            'filter_url':url
-        }) 
+        try:
+            name = request.session['name']
+            for i in range(len(pros)):
+                try :
+                    pros[i].is_ac = user_problem_status.objects.get(name=name, pro_id=pros[i].pro_id).is_ac
+                except user_problem_status.DoesNotExist :
+                    pros[i].is_ac = False
+            return render(request, 'cf/filter.html', {
+                'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
+                'range_1_to_now_page':range(1,page_id+1),
+                'range_now_page_to_all':range(page_id+1, all_page+1),
+                'filter_url':url
+            }) 
+        except KeyError:
+            for i in range(len(pros)):
+                pros[i].is_ac = False
+            return render(request, 'cf/filter.html', {
+                'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
+                'range_1_to_now_page':range(1,page_id+1),
+                'range_now_page_to_all':range(page_id+1, all_page+1),
+                'filter_url':url
+            }) 
     except ValueError:
         return redirect('/cf/problem/page/1')
         # all_pro = len(problem.objects.all())
@@ -44,13 +60,28 @@ def tag_filter(request, tags, page_id):
     all_pro = get_pro_by_tags(tags)
     all_page = (len(all_pro)+99) // 100
     pros = all_pro[100*page_id-100:min(100*page_id, len(all_pro))]
-    return render(request, 'cf/filter.html', {
-            'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
-            'range_1_to_now_page':range(1,page_id+1),
-            'range_now_page_to_all':range(page_id+1, all_page+1),
-            'filter_url':url,
-        }) 
-
+    try:
+        name = request.session['name']
+        for i in range(len(pros)):
+            try :
+                pros[i].is_ac = user_problem_status.objects.get(name=name, pro_id=pros[i].pro_id).is_ac
+            except user_problem_status.DoesNotExist :
+                pros[i].is_ac = False
+        return render(request, 'cf/filter.html', {
+                'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
+                'range_1_to_now_page':range(1,page_id+1),
+                'range_now_page_to_all':range(page_id+1, all_page+1),
+                'filter_url':url,
+            }) 
+    except KeyError:
+        for i in range(len(pros)):
+            pros[i].is_ac = False
+        return render(request, 'cf/filter.html', {
+                'title':'CF problem here','pros':pros, 'page_id':page_id, 'all_page':all_page,
+                'range_1_to_now_page':range(1,page_id+1),
+                'range_now_page_to_all':range(page_id+1, all_page+1),
+                'filter_url':url,
+            }) 
 def dif_tag_filter(request, from_dif, to_dif, tags, page_id):
     try:
         url = '/cf/problem/dif-'+from_dif+'-'+to_dif+'-tag-'+tags
@@ -62,12 +93,28 @@ def dif_tag_filter(request, from_dif, to_dif, tags, page_id):
         all_pro = sorted(all_pro, key=lambda x: x.my_id, reverse=True)
         all_page = (len(all_pro) + 99) // 100
         pros = all_pro[100*page_id-100:min(100*page_id, len(all_pro))]
-        return render(request, 'cf/filter.html',{
-            'title':'CF problem here', 'pros':pros, 'page_id':page_id,'all_page':all_page,
-            'range_1_to_now_page':range(1,page_id+1),
-            'range_now_page_to_all':range(page_id+1, all_page+1),
-            'filter_url':url
-        })
+        try:
+            name = request.session['name']
+            for i in range(len(pros)):
+                try :
+                    pros[i].is_ac = user_problem_status.objects.get(name=name, pro_id=pros[i].pro_id).is_ac
+                except user_problem_status.DoesNotExist :
+                    pros[i].is_ac = False
+            return render(request, 'cf/filter.html',{
+                'title':'CF problem here', 'pros':pros, 'page_id':page_id,'all_page':all_page,
+                'range_1_to_now_page':range(1,page_id+1),
+                'range_now_page_to_all':range(page_id+1, all_page+1),
+                'filter_url':url
+            })
+        except KeyError:
+            for i in range(len(pros)):
+                pros[i].is_ac = False
+            return render(request, 'cf/filter.html',{
+                'title':'CF problem here', 'pros':pros, 'page_id':page_id,'all_page':all_page,
+                'range_1_to_now_page':range(1,page_id+1),
+                'range_now_page_to_all':range(page_id+1, all_page+1),
+                'filter_url':url
+            })
     except  ValueError:
         url = '/cf/problem/tag-'+tags+'/page/1'
         return redirect(url)

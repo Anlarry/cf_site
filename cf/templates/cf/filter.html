@@ -165,7 +165,11 @@
             </tr>
             {% for each in pros%}
                 <tr class="alt">
+                    {%if each.is_ac%} 
+                    <td style="background-color:#b2f6c6;">
+                    {%else%}
                     <td>
+                    {%endif%}
                         <a style="text-decoration: none;color: black;" href="{% url 'problem_page' each.pro_id%}">{{each.pro_id}}</a>
                     </td>
                     <td>
